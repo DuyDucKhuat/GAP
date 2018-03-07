@@ -1,0 +1,35 @@
+######################################################################
+#AvgOrdOfGroup(G)
+#
+#
+#Calculating the average order of an element
+#of G, where G is a group
+#
+#
+
+
+AvgOrdOfGroup:= function(G)
+	local sum,g;
+	sum:= 0;
+	for g in G do 
+		sum:= sum + Order(g);
+	od;
+	return sum/Size(G);
+end;;
+
+
+
+A1:= function(G)
+	local ComG,h, liste, sum, g;
+	liste := [];
+	for h in G do
+		ComG:= Set(List(G, g -> g* h * g^(-1) *h^(-1))); 
+		Append(liste,ComG);	
+		liste:= Set(liste);
+	od;
+	sum:= 0;
+	for g in liste do 
+		sum:= sum + Order(g);
+	od;
+	return sum/Size(liste);
+end;;
